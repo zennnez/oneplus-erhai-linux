@@ -605,7 +605,6 @@ static const struct {
 	{ &xn242_mode_60,  60  },
 	{ &xn242_mode_90,  90  },
 	{ &xn242_mode_120, 120 },
-	{ &xn242_mode_144, 144 },
 };
 
 static int xn242_get_modes(struct drm_panel *panel,
