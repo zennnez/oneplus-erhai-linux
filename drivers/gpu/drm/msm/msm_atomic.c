@@ -43,6 +43,15 @@ bool msm_crtc_is_seamless_dfps(const struct drm_crtc_state *old_state,
 	 * porch-able regardless of the nominal mode->clock label (DSC decouples
 	 * the uncompressed pixel throughput from the link rate).
 	 */
+	/*
+	 * Porch-only seamless DFPS requires a constant horizontal total (line width).
+	 * When htotal changes (e.g. 120<->144 on the XN242: 3684<->3532), on-the-fly
+	 * DSI register updates desync the DSI FIFO and DDIC DSC decoder.
+	 * Modes with different htotal must take a clean, full modeset.
+	 */
+	if (om->htotal != nm->htotal)
+		return false;
+
 	/* require an actual timing (porch) change, else there is nothing to do */
 	if (om->htotal == nm->htotal && om->vtotal == nm->vtotal &&
 	    om->hsync_start == nm->hsync_start && om->hsync_end == nm->hsync_end &&

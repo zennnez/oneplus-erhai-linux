@@ -372,6 +372,22 @@ static const struct drm_display_mode xn242_mode_single_120 = {
  * for why, and for the timing needed to bring it back.
  */
 
+/* 144Hz: htotal=3532, vfp=26 vbp=52 -> vtotal=2480 (full modeset domain) */
+static const struct drm_display_mode xn242_mode_144 = {
+	.clock = 1261188,
+	.hdisplay = 3392,
+	.hsync_start = 3392 + 68,
+	.hsync_end = 3392 + 68 + 32,
+	.htotal = 3532,
+	.vdisplay = 2400,
+	.vsync_start = 2400 + 26,
+	.vsync_end = 2400 + 26 + 2,
+	.vtotal = 2480,
+	.width_mm = 274,
+	.height_mm = 193,
+	.type = DRM_MODE_TYPE_DRIVER,
+};
+
 /* 30Hz: htotal=3684, vfp=8000 vbp=230 -> vtotal=10632 */
 static const struct drm_display_mode xn242_mode_30 = {
 	.clock = 1175048,
@@ -589,6 +605,7 @@ static const struct {
 	{ &xn242_mode_60,  60  },
 	{ &xn242_mode_90,  90  },
 	{ &xn242_mode_120, 120 },
+	{ &xn242_mode_144, 144 },
 };
 
 static int xn242_get_modes(struct drm_panel *panel,
